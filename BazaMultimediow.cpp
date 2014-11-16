@@ -14,102 +14,111 @@ BazaMultimediow::BazaMultimediow()
 {
 }
 
-
 BazaMultimediow::~BazaMultimediow()
 {
 }
 
- void BazaMultimediow::wyswietlWszystkieElementy()
- {
-     
-     for (int i=0;i<listaFilmow.size();i++)
-     {
-         cout<<i+1<<".";
-        listaFilmow[i]->wyswietl();
-     }
-         
-     
-     cout<<endl;
-     
- }
- void BazaMultimediow::wyswietlWszystkieTytulyElementow()
- {
-     for (int i=0;i<listaFilmow.size();i++)
-         cout<<i<<". "<<listaFilmow[i]->getTytul()<<endl;
-     
-     cout<<endl;
-     
- }
- 
-   bool BazaMultimediow::dodajFilm(string tytul, string gatunek, int ocena)
-   {
-         if ((tytul.length()>0) && (gatunek.length() >0) && (ocena !=0))
-        {
-            
-            listaFilmow.push_back(new Film(tytul,gatunek,ocena));
-            
-            
-        
-            
-            return true;
-        } else 
-            return false;
-   }
+void BazaMultimediow::wyswietlWszystkieElementy()
+{
+    int size = listaElementow.size();
+    if (size > 0)
+    {
 
-   bool BazaMultimediow::dodajGre(string tytul, string gatunek, int ocena)
-   {
-          if ((tytul.length()>0) && (gatunek.length() >0) && (ocena !=0))
+
+        cout << "Twoja baza danych:" << endl;
+        for (int i = 0; i < size; i++)
         {
-            
-            listaFilmow.push_back(new Film(tytul,gatunek,ocena));
-            
-            
-        
-            
-            return true;
-        } else 
-            return false;   if ((tytul.length()>0) && (gatunek.length() >0) && (ocena !=0))
-        {
-            
-            listaFilmow.push_back(new Gra(tytul,gatunek,ocena));
-            
-            
-        
-            
-            return true;
-        } else 
-            return false;
-          
-   }
-    bool BazaMultimediow::usunFilm(int x) 
-    {
-        if (x<listaFilmow.size())
-        {
-            delete listaFilmow[x];
-             listaFilmow.erase(listaFilmow.begin()+x);
-             return true;
-        }else
-        {
-            return false;
+            cout << i + 1 << ".";
+            listaElementow[i]->wyswietl();
         }
-       
-        
+
+
+        cout << endl;
+    } else
+    {
+        cout << "Twoja baza danych jest pusta." << endl;
     }
-    bool BazaMultimediow::usunFilm(string tytul)
+
+}
+
+void BazaMultimediow::wyswietlWszystkieTytulyElementow()
+{
+    for (int i = 0; i < listaElementow.size(); i++)
+        cout << i+1 << ". " << listaElementow[i]->getTytul() << endl;
+
+    cout << endl;
+
+}
+
+bool BazaMultimediow::dodajFilm(string tytul, string gatunek, int ocena)
+{
+    if ((tytul.length() > 0) && (gatunek.length() > 0) && (ocena != 0))
     {
-   
-        for (int i =0;i<listaFilmow.size(); i++)
-        {
-           if (listaFilmow[i]->getTytul() == tytul)
-           {
-                delete listaFilmow[i];
-                listaFilmow.erase(listaFilmow.begin()+i);
-                
-                return true;
-                
-               
-           }
-        }
-        
+
+        listaElementow.push_back(new Film(tytul, gatunek, ocena));
+
+        return true;
+    } else
+        return false;
+}
+
+bool BazaMultimediow::dodajGre(string tytul, string gatunek, int ocena)
+{
+    if ((tytul.length() > 0) && (gatunek.length() > 0) && (ocena != 0))
+    {
+
+        listaElementow.push_back(new Gra(tytul, gatunek, ocena));
+
+
+
+
+        return true;
+    } else
+        return false;
+    if ((tytul.length() > 0) && (gatunek.length() > 0) && (ocena != 0))
+    {
+
+        listaElementow.push_back(new Gra(tytul, gatunek, ocena));
+
+
+
+
+        return true;
+    } else
+        return false;
+
+}
+
+bool BazaMultimediow::usunElement(int x)
+{
+    if (x < listaElementow.size())
+    {
+        delete listaElementow[x];
+        listaElementow.erase(listaElementow.begin() + x);
+        return true;
+    } else
+    {
         return false;
     }
+
+
+}
+
+bool BazaMultimediow::usunElement(string tytul)
+{
+
+    for (int i = 0; i < listaElementow.size(); i++)
+    {
+        if (listaElementow[i]->getTytul() == tytul)
+        {
+            delete listaElementow[i];
+            listaElementow.erase(listaElementow.begin() + i);
+
+            return true;
+
+
+        }
+    }
+
+    return false;
+}

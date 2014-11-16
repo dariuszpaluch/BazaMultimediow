@@ -10,35 +10,41 @@
 #include <stdio.h>
 #include "Film.h"
 
-PanelMenu::PanelMenu(BazaMultimediow * bazafilmow) {
-    this->bazaFilmow = bazafilmow;
+PanelMenu::PanelMenu(BazaMultimediow * bazafilmow)
+{
+    this->bazaElementow = bazafilmow;
 
 }
 
-PanelMenu::PanelMenu(const PanelMenu& orig) {
+PanelMenu::PanelMenu(const PanelMenu& orig)
+{
 }
 
-PanelMenu::~PanelMenu() {
+PanelMenu::~PanelMenu()
+{
 }
 
-int PanelMenu::stringToInt(string text) {
+int PanelMenu::stringToInt(string text)
+{
     int x;
     istringstream iss(text);
     iss >> x;
     return x;
 }
 
-int PanelMenu::showMainMenu() {
+int PanelMenu::showMainMenu()
+{
     int wybor = -1;
-    while (wybor != 0) {
+    while (wybor != 0)
+    {
 
 
         cout << "\n"
                 "-------------MENU-------------\n"
-                "1.Wyswietl spis filmów. \n"
+                "1.Wyswietl spis wszystkich elementow. \n"
                 "2.Dodaj film. \n"
                 "3.Dodaj gre. \n"
-                "3.Usuń film. \n"
+                "4.Usuń Element. \n"
                 "0.WYJSCIE."
                 "\n"
                 "Wprowadz nr wyboru:";
@@ -46,25 +52,12 @@ int PanelMenu::showMainMenu() {
         wybor = getAnswer();
         cout << "------------------------------" << endl;
         system("clear");
-        switch (wybor) {
+        switch (wybor)
+        {
             case 0:
                 return 0;
             case 1:
-
-                if (bazaFilmow->iloscFilmow() > 0) {
-                    if (bazaFilmow->iloscFilmow() == 1)
-                        cout << "Posiadasz: " << bazaFilmow->iloscFilmow() << " film." << endl;
-                    else {
-                        if (bazaFilmow->iloscFilmow() <= 3)
-                            cout << "Posiadasz: " << bazaFilmow->iloscFilmow() << " filmy." << endl;
-                        else
-                            cout << "Posiadasz: " << bazaFilmow->iloscFilmow() << " filmów." << endl;
-                    }
-
-                    bazaFilmow->wyswietlWszystkieElementy();
-
-                } else
-                    cout << "Twoja baza filmow jest pusta !" << endl;
+                bazaElementow->wyswietlWszystkieElementy();
                 break;
             case 2:
                 addMovieFromUser();
@@ -73,7 +66,7 @@ int PanelMenu::showMainMenu() {
                 addGameFromUser();
                 break;
             case 4:
-                if (bazaFilmow->iloscFilmow() == 0)
+                if (bazaElementow->iloscFilmow() == 0)
                     cout << "Twoja baza filmow jest pusta !" << endl;
                 else
                     removeSelectMovie();
@@ -90,21 +83,24 @@ int PanelMenu::showMainMenu() {
     }
 }
 
-int PanelMenu::getAnswer() {
+int PanelMenu::getAnswer()
+{
     string odpowiedz;
     cin >>odpowiedz;
     cin.clear();
     cin.ignore(); // to wywołanie usunie z bufora znak '\n' pozostawiony przez obiekt "cin"
 
-//    if (isdigit(odpowiedz[0]) && odpowiedz.length() == 1) {
+    if (isdigit(odpowiedz[0]) && odpowiedz.length() == 1)
+    {
 
         return stringToInt(odpowiedz);
-//    } else
-//        return -1;
+    } else
+        return -1;
 
 }
 
-void PanelMenu::addMovieFromUser() {
+void PanelMenu::addMovieFromUser()
+{
     string tytul, gatunek;
     int ocena = -1;
     cout << "Tytuł filmu:";
@@ -117,12 +113,14 @@ void PanelMenu::addMovieFromUser() {
     cout << "Ocene filmu (0-10):";
     getline(cin, ocenaString);
 
-    if (ocenaString == "10" || (ocenaString.length() == 1 && isdigit(ocenaString[0]))) {
+    if (ocenaString == "10" || (ocenaString.length() == 1 && isdigit(ocenaString[0])))
+    {
         ocena = stringToInt(ocenaString);
     }
 
-    if (tytul.length() > 0 && gatunek.length() > 0 && ocena != -1) {
-        bazaFilmow->dodajFilm(tytul, gatunek, ocena);
+    if (tytul.length() > 0 && gatunek.length() > 0 && ocena != -1)
+    {
+        bazaElementow->dodajFilm(tytul, gatunek, ocena);
         cout << "Dodano film do bazy danych" << endl;
 
     } else
@@ -131,10 +129,10 @@ void PanelMenu::addMovieFromUser() {
 
 void PanelMenu::addGameFromUser()
 {
-     string tytul, gatunek;
+    string tytul, gatunek;
     int ocena = -1;
-    
-    
+
+
     cout << "Tytuł gry:";
     getline(cin, tytul);
 
@@ -145,42 +143,52 @@ void PanelMenu::addGameFromUser()
     cout << "Ocene gry (0-10):";
     getline(cin, ocenaString);
 
-    if (ocenaString == "10" || (ocenaString.length() == 1 && isdigit(ocenaString[0]))) {
+    if (ocenaString == "10" || (ocenaString.length() == 1 && isdigit(ocenaString[0])))
+    {
         ocena = stringToInt(ocenaString);
     }
 
-    if (tytul.length() > 0 && gatunek.length() > 0 && ocena != -1) {
-        bazaFilmow->dodajGre(tytul, gatunek, ocena);
+    if (tytul.length() > 0 && gatunek.length() > 0 && ocena != -1)
+    {
+        bazaElementow->dodajGre(tytul, gatunek, ocena);
         cout << "Dodano gre do bazy danych" << endl;
 
     } else
         cout << "Złe wprowadzone dane. Spróboj jeszcze raz." << endl;
-    
-}
-void PanelMenu::removeSelectMovie() {
-    bazaFilmow->wyswietlWszystkieTytulyElementow();
 
-    cout << endl << "Wprowadz nazwe lub numer filmu do usunięcia: ";
+}
+
+void PanelMenu::removeSelectMovie()
+{
+    bazaElementow->wyswietlWszystkieTytulyElementow();
+
+    cout << endl << "Wprowadz nazwe lub numer Elementu do usunięcia: ";
     string answer;
     getline(cin, answer);
     bool czyNumer = true;
 
-    for (int i = 0; i < answer.length(); i++) {
+    for (int i = 0; i < answer.length(); i++)
+    {
         if (!isdigit(answer[i]))
             czyNumer = false;
     }
 
-    if (czyNumer && answer.length() > 0) {
+    if (czyNumer && answer.length() > 0)
+    {
         if (answer[0] == '0')
             czyNumer = false;
     }
 
     bool usuniecie;
-    if (czyNumer) {
+    if (czyNumer)
+    {
+        
         int index = stringToInt(answer);
-        usuniecie = bazaFilmow->usunFilm(index);
-    } else {
-        usuniecie = bazaFilmow->usunFilm(answer);
+        index--;
+        usuniecie = bazaElementow->usunElement(index);
+    } else
+    {
+        usuniecie = bazaElementow->usunElement(answer);
     }
 
 

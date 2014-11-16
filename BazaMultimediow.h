@@ -25,13 +25,25 @@ public:
     void wyswietlWszystkieTytulyElementow();
     bool dodajFilm(string tytul, string gatunek, int ocena);
     bool dodajGre(string tytul, string gatunek, int ocena);
-    bool usunFilm(int x);
-    bool usunFilm(string tytul);
+    bool usunElement(int x);
+    bool usunElement(string tytul);
     int iloscFilmow()
     {
-        return Film::iloscFilmow;
+        return Film::getIloscFilmow();
     }
-         deque<Multimedia*> listaFilmow;
+    
+    int iloscGier()
+    {
+        return Gra::getIloscGier();
+    }
+    
+    int iloscWszystkichElementow()
+    {
+        return listaElementow.size();
+    }
+    
+    
+         deque<Multimedia*> listaElementow;
 private:
 
      

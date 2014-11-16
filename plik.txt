@@ -1,2 +1,2 @@
-Horror Story	horror	9
-Assassin Creed Unity	akcja	10
+film	Shrek	bajka	9
+gra	Assassin_Creed	akcja	9

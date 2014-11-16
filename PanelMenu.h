@@ -30,7 +30,7 @@ public:
     void removeSelectMovie();
     int stringToInt(string text);
 private:
-    BazaMultimediow *bazaFilmow;
+    BazaMultimediow *bazaElementow;
 };
 
 #endif	/* PANELMENU_H */

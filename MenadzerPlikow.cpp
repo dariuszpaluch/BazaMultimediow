@@ -14,8 +14,8 @@ MenadzerPlikow::MenadzerPlikow(char *nazwaPliku) {
 string MenadzerPlikow::podkreslenieNaSpacje(string tekst)
 {
     for (int i = 0; i < tekst.length(); i++)
-//        if (tekst[i] == '_')
-//            tekst[i] = ' ';
+        if (tekst[i] == '_')
+            tekst[i] = ' ';
 
     return tekst;
 }
@@ -23,8 +23,8 @@ string MenadzerPlikow::podkreslenieNaSpacje(string tekst)
 string MenadzerPlikow::spacjaNaPodkreslenie(string tekst)
 {
     for (int i = 0; i < tekst.length(); i++)
-//        if (tekst[i] == ' ')
-//            tekst[i] = '_';
+        if (tekst[i] == ' ')
+            tekst[i] = '_';
 
     return tekst;
 }
@@ -41,13 +41,13 @@ void MenadzerPlikow::zapiszDoPliku(BazaMultimediow baza)
     {
         cout << "Uzyskano dostep do zapisu bazy danych." << endl;
 
-        for (int i = 0; i < baza.iloscFilmow(); i++)
+        for (int i = 0; i < baza.iloscWszystkichElementow(); i++)
         {
-            string tekstDoZapisu = baza.listaFilmow[i]->opisDoZapisu();
+            string tekstDoZapisu = baza.listaElementow[i]->opisDoZapisu();
             tekstDoZapisu = spacjaNaPodkreslenie(tekstDoZapisu);
             plik << tekstDoZapisu;
         }
-        
+        cout<<endl;
         cout<<"Baza danych została zapisana."<<endl;
     } else cout << "Brak dostepu do pliku, nie zapisano danych." << endl;
     plik.close();
@@ -61,6 +61,7 @@ void MenadzerPlikow::zapiszDoPliku(BazaMultimediow baza)
         // odczyt z pliku
     fstream plik_odczyt;
     string tytul, gatunek;
+    string rodzaj;
     int ocena;
     plik_odczyt.open(nazwaPliku, std::ios::in);
 
@@ -69,13 +70,17 @@ void MenadzerPlikow::zapiszDoPliku(BazaMultimediow baza)
         std::cout << "Uzyskano dostęp do pliku." << std::endl;
         while (true)
         {
-            plik_odczyt >> tytul >> gatunek>>ocena;
+            plik_odczyt >>rodzaj>> tytul >> gatunek>>ocena;
 
             if (plik_odczyt.good())
             {
                 tytul = podkreslenieNaSpacje(tytul);
                 gatunek = podkreslenieNaSpacje(gatunek);
-                baza.dodajFilm(tytul, gatunek, ocena);
+                
+                if (rodzaj=="film")
+                    baza.dodajFilm(tytul, gatunek, ocena);
+                if (rodzaj=="gra")
+                    baza.dodajGre(tytul,gatunek,ocena);
             } else
                 break;
         }

@@ -19,8 +19,8 @@ Gra::~Gra() {
 
 void Gra::wyswietl()
 {
-     cout << "tytuł: " << tytul << endl;
-    cout << "gatunek: " << gatunek << endl;
+     cout << "Gra: " << tytul<<", ";
+    cout << "gatunek: " << gatunek<<", ";
     cout << "ocena: " << ocena << endl;
     
 }
@@ -34,7 +34,7 @@ string Gra::opisDoZapisu()
     string ocenaString = ss.str();
     
 
-    string text = tytul+"\t"+gatunek+"\t"+ocenaString+"\n";
+    string text ="gra\t"+tytul+"\t"+gatunek+"\t"+ocenaString+"\n";
     return text;
 }
 

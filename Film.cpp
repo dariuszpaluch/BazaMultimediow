@@ -21,8 +21,8 @@ Film::~Film()
 
 void Film::wyswietl()
 {
-     cout << "tytuł: " << tytul << endl;
-    cout << "gatunek: " << gatunek << endl;
+     cout << "Film: " << tytul <<", ";
+    cout << "gatunek: " << gatunek <<", ";
     cout << "ocena: " << ocena << endl;
     
 }
@@ -37,7 +37,7 @@ string Film::opisDoZapisu()
     string ocenaString = ss.str();
     
 
-    string text = tytul+"\t"+gatunek+"\t"+ocenaString+"\n";
+    string text ="film\t" + tytul+"\t"+gatunek+"\t"+ocenaString+"\n";
     return text;
 }
 
