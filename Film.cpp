@@ -7,8 +7,10 @@
 
 #include "Film.h"
 
-Film::Film(string tytul, string gatunek, int ocena):Multimedia(tytul,gatunek,ocena)
+Film::Film(string tytul, string gatunek, int ocena, string wersja, int rokPremiery):Multimedia(tytul,gatunek,ocena)
 {
+    this->wersja=wersja;
+    this->rokPremiery=rokPremiery;
     iloscFilmow++;
 }
 
@@ -23,7 +25,9 @@ void Film::wyswietl()
 {
      cout << "Film: " << tytul <<", ";
     cout << "gatunek: " << gatunek <<", ";
-    cout << "ocena: " << ocena << endl;
+    cout << "ocena: " << ocena <<", ";
+    cout <<"wersja: "<<wersja<<", ";
+    cout <<"premiera: "<<rokPremiery<<endl;
     
 }
 
@@ -36,8 +40,13 @@ string Film::opisDoZapisu()
     ss << ocena;
     string ocenaString = ss.str();
     
+    
+    ostringstream ss2;
+    ss2 << rokPremiery;
+    string rokPremieryString = ss2.str();
+    
 
-    string text ="film\t" + tytul+"\t"+gatunek+"\t"+ocenaString+"\n";
+    string text ="film\t" + tytul+"\t"+gatunek+"\t"+ocenaString+"\t"+wersja+"\t"+rokPremieryString+"\n";
     return text;
 }
 

@@ -50,12 +50,12 @@ void BazaMultimediow::wyswietlWszystkieTytulyElementow()
 
 }
 
-bool BazaMultimediow::dodajFilm(string tytul, string gatunek, int ocena)
+bool BazaMultimediow::dodajFilm(string tytul, string gatunek, int ocena, string wersja, int rokPremiery)
 {
     if ((tytul.length() > 0) && (gatunek.length() > 0) && (ocena != 0))
     {
 
-        listaElementow.push_back(new Film(tytul, gatunek, ocena));
+        listaElementow.push_back(new Film(tytul, gatunek, ocena, wersja, rokPremiery));
 
         return true;
     } else

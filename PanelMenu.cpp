@@ -26,10 +26,27 @@ PanelMenu::~PanelMenu()
 
 int PanelMenu::stringToInt(string text)
 {
-    int x;
-    istringstream iss(text);
-    iss >> x;
-    return x;
+    bool liczba = true;
+
+    if (text[0] == '0' && text.length()>1)
+        liczba = false;
+    else
+        for (int i = 0; i < text.length(); i++)
+        {
+            if (!isdigit(text[i]))
+                liczba = false;
+        }
+
+    if (liczba)
+    {
+
+
+        int x;
+        istringstream iss(text);
+        iss >> x;
+        return x;
+    } else
+        return -1;
 }
 
 int PanelMenu::showMainMenu()
@@ -103,6 +120,7 @@ void PanelMenu::addMovieFromUser()
 {
     string tytul, gatunek;
     int ocena = -1;
+    string wersja;
     cout << "Tytuł filmu:";
     getline(cin, tytul);
 
@@ -112,15 +130,33 @@ void PanelMenu::addMovieFromUser()
     string ocenaString;
     cout << "Ocene filmu (0-10):";
     getline(cin, ocenaString);
+    
+    ocena = stringToInt(ocenaString);
+    if (!(ocena<=10 && ocena >=0))
+        ocena=-1;
 
-    if (ocenaString == "10" || (ocenaString.length() == 1 && isdigit(ocenaString[0])))
-    {
-        ocena = stringToInt(ocenaString);
-    }
+    bool wprowadzonaWersja = false;
+    cout << "Wersja filmu(pl/napisy/lektor):";
+    getline(cin, wersja);
 
-    if (tytul.length() > 0 && gatunek.length() > 0 && ocena != -1)
+    if (wersja == "pl" || wersja == "napisy" || wersja == "lektor")
+        wprowadzonaWersja = true;
+
+    string rokPremieryString;
+    cout << "Rok premiery:";
+    getline(cin, rokPremieryString);
+
+    int rokPremiery = stringToInt(rokPremieryString);
+    if (!(rokPremiery>1000 && rokPremiery <=2014))
+        rokPremiery=-1;
+
+
+
+
+
+    if (tytul.length() > 0 && gatunek.length() > 0 && ocena != -1 && wprowadzonaWersja && rokPremiery!=-1)
     {
-        bazaElementow->dodajFilm(tytul, gatunek, ocena);
+        bazaElementow->dodajFilm(tytul, gatunek, ocena, wersja, rokPremiery);
         cout << "Dodano film do bazy danych" << endl;
 
     } else
@@ -182,7 +218,7 @@ void PanelMenu::removeSelectMovie()
     bool usuniecie;
     if (czyNumer)
     {
-        
+
         int index = stringToInt(answer);
         index--;
         usuniecie = bazaElementow->usunElement(index);
@@ -193,6 +229,6 @@ void PanelMenu::removeSelectMovie()
 
 
     if (!usuniecie)
-        cout << "Takiego filmu nie ma w bazie" << endl;
+        cout << "Takiego elementu nie ma w bazie." << endl;
 
 }

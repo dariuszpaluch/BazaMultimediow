@@ -23,7 +23,7 @@ public:
     virtual ~BazaMultimediow();
     void wyswietlWszystkieElementy();
     void wyswietlWszystkieTytulyElementow();
-    bool dodajFilm(string tytul, string gatunek, int ocena);
+    bool dodajFilm(string tytul, string gatunek, int ocena, string wersja , int rokPremiery);
     bool dodajGre(string tytul, string gatunek, int ocena);
     bool usunElement(int x);
     bool usunElement(string tytul);
@@ -44,6 +44,7 @@ public:
     
     
          deque<Multimedia*> listaElementow;
+         
 private:
 
      

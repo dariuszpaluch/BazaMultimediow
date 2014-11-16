@@ -63,6 +63,8 @@ void MenadzerPlikow::zapiszDoPliku(BazaMultimediow baza)
     string tytul, gatunek;
     string rodzaj;
     int ocena;
+    string wersja;
+    int rokPremiery;
     plik_odczyt.open(nazwaPliku, std::ios::in);
 
     if (plik_odczyt.good() == true)
@@ -70,15 +72,25 @@ void MenadzerPlikow::zapiszDoPliku(BazaMultimediow baza)
         std::cout << "Uzyskano dostęp do pliku." << std::endl;
         while (true)
         {
-            plik_odczyt >>rodzaj>> tytul >> gatunek>>ocena;
+            plik_odczyt >>rodzaj;
 
+            if (rodzaj=="film")
+            {
+               plik_odczyt>> tytul >> gatunek>>ocena>>wersja>>rokPremiery; 
+            } 
+            
+            if (rodzaj=="gra")
+                plik_odczyt >>tytul >> gatunek>>ocena;
+             
+            
+            
             if (plik_odczyt.good())
             {
                 tytul = podkreslenieNaSpacje(tytul);
                 gatunek = podkreslenieNaSpacje(gatunek);
                 
                 if (rodzaj=="film")
-                    baza.dodajFilm(tytul, gatunek, ocena);
+                    baza.dodajFilm(tytul, gatunek, ocena,wersja,rokPremiery);
                 if (rodzaj=="gra")
                     baza.dodajGre(tytul,gatunek,ocena);
             } else
