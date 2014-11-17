@@ -44,7 +44,10 @@ void BazaMultimediow::wyswietlWszystkieElementy()
 void BazaMultimediow::wyswietlWszystkieTytulyElementow()
 {
     for (int i = 0; i < listaElementow.size(); i++)
-        cout << i+1 << ". " << listaElementow[i]->getTytul() << endl;
+        cout<<i+1<<"."<<(*listaElementow[i])<<endl;
+       // cout << i+1 << ". " << listaElementow[i]->getTytul() << endl;
+        
+       
 
     cout << endl;
 
@@ -121,4 +124,12 @@ bool BazaMultimediow::usunElement(string tytul)
     }
 
     return false;
+}
+
+void BazaMultimediow::UsunBazeDanych()
+{
+     for (int i = 0; i < listaElementow.size(); i++)
+    {
+            delete listaElementow[i];
+    }
 }

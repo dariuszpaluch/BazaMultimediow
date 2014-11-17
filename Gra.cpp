@@ -17,6 +17,7 @@ Gra::~Gra() {
     iloscGier--;
 }
 
+int Gra::iloscGier=0;
 void Gra::wyswietl()
 {
      cout << "Gra: " << tytul<<", ";
@@ -38,9 +39,4 @@ string Gra::opisDoZapisu()
     return text;
 }
 
-ostream & operator<<(ostream &wyjscie, const Gra &gra)
-{   
-    return wyjscie << " tytuł:"<<gra.getTytul()<<", gatunek:"<<gra.getGatunek()<<", ocena:"<<gra.getOcena()<<".\n";
-}
 
-int Gra::iloscGier=0;

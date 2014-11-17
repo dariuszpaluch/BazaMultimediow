@@ -20,6 +20,7 @@ Film::~Film()
     iloscFilmow--;
     
 }
+int Film::iloscFilmow=0;
 
 void Film::wyswietl()
 {
@@ -50,8 +51,5 @@ string Film::opisDoZapisu()
     return text;
 }
 
-ostream & operator<<(ostream &wyjscie, const Film &film)
-{   
-    return wyjscie << " tytuł:"<<film.getTytul()<<", gatunek:"<<film.getGatunek()<<", ocena:"<<film.getOcena()<<".\n";
-}
-int Film::iloscFilmow=0;
+
+

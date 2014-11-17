@@ -31,6 +31,8 @@ int main(int argc, char** argv)
     
     menadzerPliku.zapiszDoPliku(baza);
     
+    baza.UsunBazeDanych();
+    
     
     return 0;
 }

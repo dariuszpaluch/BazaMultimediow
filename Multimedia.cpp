@@ -14,10 +14,12 @@ Multimedia::Multimedia(string tytul, string gatunek, int ocena)
     this->ocena = ocena;
 }
 
-Multimedia::Multimedia(const Multimedia& orig)
-{
-}
 
 Multimedia::~Multimedia()
 {
+}
+
+ostream & operator<<(ostream &wyjscie, const Multimedia &multimedia)
+{   
+    return wyjscie << multimedia.tytul;
 }

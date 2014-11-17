@@ -27,6 +27,7 @@ public:
     bool dodajGre(string tytul, string gatunek, int ocena);
     bool usunElement(int x);
     bool usunElement(string tytul);
+    void UsunBazeDanych();
     int iloscFilmow()
     {
         return Film::getIloscFilmow();

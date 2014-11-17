@@ -16,10 +16,6 @@ PanelMenu::PanelMenu(BazaMultimediow * bazafilmow)
 
 }
 
-PanelMenu::PanelMenu(const PanelMenu& orig)
-{
-}
-
 PanelMenu::~PanelMenu()
 {
 }
@@ -83,7 +79,7 @@ int PanelMenu::showMainMenu()
                 addGameFromUser();
                 break;
             case 4:
-                if (bazaElementow->iloscFilmow() == 0)
+                if (bazaElementow->iloscWszystkichElementow() == 0)
                     cout << "Twoja baza filmow jest pusta !" << endl;
                 else
                     removeSelectMovie();

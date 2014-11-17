@@ -24,7 +24,7 @@ public:
     {
         return iloscGier;
     }
-    friend ostream & operator<<(ostream &wyjscie, const Gra &gra);
+   
     friend class BazaMultimediow;
     virtual string opisDoZapisu();
     virtual void wyswietl();

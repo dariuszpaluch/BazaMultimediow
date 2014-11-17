@@ -21,7 +21,7 @@ class PanelMenu
 {
 public:
     PanelMenu(BazaMultimediow * bazaFilmow);
-    PanelMenu(const PanelMenu& orig);
+
     virtual ~PanelMenu();
     int showMainMenu();
     int getAnswer();

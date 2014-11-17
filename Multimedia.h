@@ -23,11 +23,10 @@ public:
  
     
     Multimedia(string tytul, string gatunek, int ocena);
-    Multimedia(const Multimedia& orig);
     virtual ~Multimedia();
     virtual void wyswietl()=0;
     virtual string opisDoZapisu()=0;
-    
+    friend ostream & operator<<(ostream &wyjscie, const Multimedia &multimedia);
     string getGatunek() const
     {
         return gatunek;

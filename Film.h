@@ -24,7 +24,7 @@ public:
     {
         return iloscFilmow;
     }
-    friend ostream & operator<<(ostream &wyjscie, const Film &film);
+    
     
     friend class BazaMultimediow;
     virtual string opisDoZapisu();
