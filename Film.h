@@ -15,17 +15,16 @@
 
 using namespace std;
 
-class Film : public Multimedia
-{
+class Film : public Multimedia {
 public:
     Film(string tytul, string gatunek, int ocena, string wersja, int rokPremiery, bool widzialem);
     virtual ~Film();
-    static int getIloscFilmow() 
-    {
+
+    static int getIloscFilmow() {
         return iloscFilmow;
     }
-    
-    
+
+
     friend class BazaMultimediow;
     virtual string opisDoZapisu();
     virtual void wyswietl();
@@ -37,22 +36,30 @@ public:
     void setWersja(string wersja) {
         this->wersja = wersja;
     }
-    
-     int getRokPremiery() const {
+
+    int getRokPremiery() const {
         return rokPremiery;
     }
 
     void setRokPremiery(int rokPremiery) {
         this->rokPremiery = rokPremiery;
     }
-    
+
+    bool isWidzialem() const {
+        return widzialem;
+    }
+
+    void setWidzialem() {
+        this->widzialem = true;
+    }
+
 
 private:
     static int iloscFilmow;
     string wersja;
     int rokPremiery;
     bool widzialem;
-   
+
 
 };
 

@@ -28,6 +28,7 @@ public:
     void addMovieFromUser();
     void addGameFromUser();
     void removeSelectMovie();
+    void setWatchedMovieFromUser();
     int stringToInt(string text);
 private:
     BazaMultimediow *bazaElementow;

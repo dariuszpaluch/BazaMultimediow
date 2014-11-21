@@ -23,8 +23,12 @@ public:
     virtual ~BazaMultimediow();
     void wyswietlWszystkieElementy();
     void wyswietlWszystkieFilmy();
+    void wyswietlFilmyKtorychNieWidziales();
     void wyswietlWszystkieGry();
     void wyswietlWszystkieTytulyElementow();
+    void wyswietlWszystkieTytuluFilmowNieWidzialem();
+    bool setSelectWatchedMovie(string tittleMovie);
+    
     bool dodajFilm(string tytul, string gatunek, int ocena, string wersja , int rokPremiery, bool widzialem);
     bool dodajGre(string tytul, string gatunek, int ocena);
     bool usunElement(int x);

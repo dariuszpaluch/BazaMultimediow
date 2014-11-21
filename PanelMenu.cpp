@@ -57,9 +57,11 @@ int PanelMenu::showMainMenu()
                 "1.Wyświetl spis wszystkich elementów. \n"
                 "2.Wyświetl wszystkie filmy.\n"
                 "3.Wyświetl wszytkie gry.\n"
-                "4.Dodaj film. \n"
-                "5.Dodaj gre. \n"
-                "6.Usuń Element. \n"
+                "4.Wyświetl filmy które nie widziałeś.\n"
+                "5.Dodaj film. \n"
+                "6.Dodaj gre. \n"
+                "7.Zaznacz że obejrzałeś jakiś film.\n"
+                "8.Usuń Element. \n"
                 "0.WYJSCIE."
                 "\n"
                 "Wprowadz nr wyboru:";
@@ -81,12 +83,18 @@ int PanelMenu::showMainMenu()
                 bazaElementow->wyswietlWszystkieGry();
                 break;
             case 4:
-                addMovieFromUser();
+                bazaElementow->wyswietlFilmyKtorychNieWidziales();
                 break;
             case 5:
-                addGameFromUser();
+                addMovieFromUser();
                 break;
             case 6:
+                addGameFromUser();
+                break;
+            case 7:
+                setWatchedMovieFromUser();
+                break;
+            case 8:
                 if (bazaElementow->iloscWszystkichElementow() == 0)
                     cout << "Twoja baza filmow jest pusta !" << endl;
                 else
@@ -158,7 +166,7 @@ void PanelMenu::addMovieFromUser()
     if (!(rokPremiery > 1000 && rokPremiery <= 2014))
         rokPremiery = -1;
 
-    string widzialem="";
+    string widzialem = "";
     cout << "Czy widziałeś ten film (TAK,NIE):";
     getline(cin, widzialem);
     bool widzialemBool;
@@ -166,7 +174,7 @@ void PanelMenu::addMovieFromUser()
         widzialemBool = true;
     else
         widzialemBool = false;
-    
+
 
 
     if (tytul.length() > 0 && gatunek.length() > 0 && ocena != -1 && wprowadzonaWersja && rokPremiery != -1)
@@ -206,6 +214,27 @@ void PanelMenu::addGameFromUser()
 
     } else
         cout << "Złe wprowadzone dane. Spróboj jeszcze raz." << endl;
+
+}
+
+void PanelMenu::setWatchedMovieFromUser()
+{
+    bazaElementow->wyswietlWszystkieTytuluFilmowNieWidzialem();
+    cout << endl << "Wprowadz nazwę filmu który widziałeś: ";
+    string answer;
+    getline(cin, answer);
+    bool widzialem = false;
+    widzialem = bazaElementow->setSelectWatchedMovie(answer);
+
+
+    if (widzialem)
+        cout << "Zmieniono dane filmu";
+    else
+        cout << "Nie ma takiego filmu.";
+
+
+
+
 
 }
 

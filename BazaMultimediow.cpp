@@ -97,6 +97,64 @@ void BazaMultimediow::wyswietlWszystkieTytulyElementow()
 
 }
 
+void BazaMultimediow::wyswietlFilmyKtorychNieWidziales()
+{
+   bool brakFilmowDoWyswietlenia=false;
+    for (int i=0; i< listaFilmow.size(); i++)
+    {
+        if (!((Film*)listaElementow[listaFilmow[i]])->isWidzialem())
+        {
+           ((Film*)listaElementow[listaFilmow[i]])->wyswietl();
+           brakFilmowDoWyswietlenia=true;
+           
+        }
+            
+    }
+    
+    if (!brakFilmowDoWyswietlenia)
+        cout<< "Widziałeś wszystkie filmy z bazy danych.";
+    
+    cout<<endl;
+}
+
+bool BazaMultimediow::setSelectWatchedMovie(string tittleMovie)
+{   
+    for (int i=0; i<listaFilmow.size(); i++)
+    {
+        if (listaElementow[listaFilmow[i]]->getTytul()==tittleMovie)
+        {
+            ((Film*)listaElementow[listaFilmow[i]])->setWidzialem();
+            return true;
+        }
+            
+                
+    }
+       
+        
+    return false;
+}
+
+void BazaMultimediow::wyswietlWszystkieTytuluFilmowNieWidzialem()
+{
+    int size = listaFilmow.size();
+    Film *film;
+    //dynamic_cast < Kwadrat *>( p );
+    int j=1;
+    for (int i=0; i< size; i++)
+    {
+        film = dynamic_cast <Film*> (listaElementow[listaFilmow[i]]);
+        if (!film->isWidzialem())
+        {
+            cout<<j<<"."<< film->getTytul();
+            j++;
+        }
+            
+            
+         cout << endl;   
+        
+    }
+}
+
 bool BazaMultimediow::dodajFilm(string tytul, string gatunek, int ocena, string wersja, int rokPremiery, bool widzialem)
 {
     if ((tytul.length() > 0) && (gatunek.length() > 0) && (ocena != 0))
