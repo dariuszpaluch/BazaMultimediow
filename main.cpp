@@ -10,7 +10,9 @@
 #include "BazaMultimediow.h"
 #include "PanelMenu.h"
 #include "MenadzerPlikow.h"
+#include "Multimedia.h"
 #include <string>
+#include <deque>
 
 
 
@@ -32,7 +34,6 @@ int main(int argc, char** argv)
     menadzerPliku.zapiszDoPliku(baza);
     
     baza.UsunBazeDanych();
-    
     
     return 0;
 }

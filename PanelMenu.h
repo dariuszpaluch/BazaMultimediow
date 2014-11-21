@@ -25,6 +25,10 @@ public:
     virtual ~PanelMenu();
     int showMainMenu();
     int getAnswer();
+    void wyswietlWszystkieElementy();
+    void wyswietlWszystkieFilmy();
+    void wyswietlWszystkieGry();
+    void wyswietlFilmyKtorychNieWidziales();
     void addMovieFromUser();
     void addGameFromUser();
     void removeSelectMovie();

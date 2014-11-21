@@ -21,12 +21,12 @@ public:
    
     BazaMultimediow();
     virtual ~BazaMultimediow();
-    void wyswietlWszystkieElementy();
-    void wyswietlWszystkieFilmy();
-    void wyswietlFilmyKtorychNieWidziales();
-    void wyswietlWszystkieGry();
-    void wyswietlWszystkieTytulyElementow();
-    void wyswietlWszystkieTytuluFilmowNieWidzialem();
+    bool wyswietlWszystkieElementy();
+    bool wyswietlWszystkieFilmy();
+    bool wyswietlFilmyKtorychNieWidziales();
+    bool wyswietlWszystkieGry();
+    bool wyswietlWszystkieTytulyElementow();
+    bool wyswietlWszystkieTytuluFilmowNieWidzialem();
     bool setSelectWatchedMovie(string tittleMovie);
     
     bool dodajFilm(string tytul, string gatunek, int ocena, string wersja , int rokPremiery, bool widzialem);
@@ -53,8 +53,8 @@ public:
          deque<Multimedia*> listaElementow;
          
 private:
-    deque<int> listaFilmow;
-    deque<int> listaGier;
+    deque<Film*> listaFilmow;
+    deque<Gra*> listaGier;
      
 
      

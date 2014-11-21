@@ -74,16 +74,16 @@ int PanelMenu::showMainMenu()
             case 0:
                 return 0;
             case 1:
-                bazaElementow->wyswietlWszystkieElementy();
+                wyswietlWszystkieElementy();
                 break;
             case 2:
-                bazaElementow->wyswietlWszystkieFilmy();
+                wyswietlWszystkieFilmy();
                 break;
             case 3:
-                bazaElementow->wyswietlWszystkieGry();
+                wyswietlWszystkieGry();
                 break;
             case 4:
-                bazaElementow->wyswietlFilmyKtorychNieWidziales();
+                wyswietlFilmyKtorychNieWidziales();
                 break;
             case 5:
                 addMovieFromUser();
@@ -95,25 +95,41 @@ int PanelMenu::showMainMenu()
                 setWatchedMovieFromUser();
                 break;
             case 8:
-                if (bazaElementow->iloscWszystkichElementow() == 0)
-                    cout << "Twoja baza filmow jest pusta !" << endl;
-                else
-                    removeSelectMovie();
-                break;
-
+                removeSelectMovie();
                 break;
             default:
                 cout << "***Nie ma takiego wyboru.**** \n";
         }
         cout << endl << "Naciśnij aby kontynuować.";
         cin.get();
-        // int x;
-        // cin >> x;
-        //       cin.clear();
-        //       cin.ignore();
         system("clear");
 
     }
+}
+
+void PanelMenu::wyswietlWszystkieElementy()
+{
+    if (!bazaElementow->wyswietlWszystkieElementy())
+        cout << "Twoja baza danych jest pusta." << endl;
+
+}
+
+void PanelMenu::wyswietlWszystkieFilmy()
+{
+    if (!bazaElementow->wyswietlWszystkieFilmy())
+        cout << "Twoja baza filmów jest pusta." << endl;
+}
+
+void PanelMenu::wyswietlWszystkieGry()
+{
+    if (!bazaElementow->wyswietlWszystkieGry())
+        cout << "Twoja baza gier jest pusta." << endl;
+}
+
+void PanelMenu::wyswietlFilmyKtorychNieWidziales()
+{
+    if (!bazaElementow->wyswietlFilmyKtorychNieWidziales())
+        cout << "Widziałeś wszystkie filmy z twojej bazy danych." << endl;
 }
 
 int PanelMenu::getAnswer()
@@ -219,60 +235,66 @@ void PanelMenu::addGameFromUser()
 
 void PanelMenu::setWatchedMovieFromUser()
 {
-    bazaElementow->wyswietlWszystkieTytuluFilmowNieWidzialem();
-    cout << endl << "Wprowadz nazwę filmu który widziałeś: ";
-    string answer;
-    getline(cin, answer);
-    bool widzialem = false;
-    widzialem = bazaElementow->setSelectWatchedMovie(answer);
+    if (bazaElementow->wyswietlWszystkieTytuluFilmowNieWidzialem())
+    {
+        cout << endl << "Wprowadz nazwę filmu który widziałeś: ";
+        string answer;
+        getline(cin, answer);
+        bool widzialem = false;
+        widzialem = bazaElementow->setSelectWatchedMovie(answer);
 
 
-    if (widzialem)
-        cout << "Zmieniono dane filmu";
-    else
-        cout << "Nie ma takiego filmu.";
+        if (widzialem)
+            cout << "Zmieniono dane filmu";
+        else
+            cout << "Nie ma takiego filmu.";
 
 
 
 
-
+    }
+    cout << "Widziałeś wszystkie filmy z bazy danych";
 }
 
 void PanelMenu::removeSelectMovie()
 {
-    bazaElementow->wyswietlWszystkieTytulyElementow();
 
-    cout << endl << "Wprowadz nazwe lub numer Elementu do usunięcia: ";
-    string answer;
-    getline(cin, answer);
-    bool czyNumer = true;
-
-    for (int i = 0; i < answer.length(); i++)
-    {
-        if (!isdigit(answer[i]))
-            czyNumer = false;
-    }
-
-    if (czyNumer && answer.length() > 0)
-    {
-        if (answer[0] == '0')
-            czyNumer = false;
-    }
-
-    bool usuniecie;
-    if (czyNumer)
+    if (bazaElementow->wyswietlWszystkieTytulyElementow())
     {
 
-        int index = stringToInt(answer);
-        index--;
-        usuniecie = bazaElementow->usunElement(index);
+
+        cout << endl << "Wprowadz nazwe lub numer Elementu do usunięcia: ";
+        string answer;
+        getline(cin, answer);
+        bool czyNumer = true;
+
+        for (int i = 0; i < answer.length(); i++)
+        {
+            if (!isdigit(answer[i]))
+                czyNumer = false;
+        }
+
+        if (czyNumer && answer.length() > 0)
+        {
+            if (answer[0] == '0')
+                czyNumer = false;
+        }
+
+        bool usuniecie;
+        if (czyNumer)
+        {
+
+            int index = stringToInt(answer);
+            index--;
+            usuniecie = bazaElementow->usunElement(index);
+        } else
+        {
+            usuniecie = bazaElementow->usunElement(answer);
+        }
+
+
+        if (!usuniecie)
+            cout << "Takiego elementu nie ma w bazie." << endl;
     } else
-    {
-        usuniecie = bazaElementow->usunElement(answer);
+        cout << "Twoja baza danych jest pusta.";
     }
-
-
-    if (!usuniecie)
-        cout << "Takiego elementu nie ma w bazie." << endl;
-
-}

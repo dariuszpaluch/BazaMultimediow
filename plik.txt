@@ -1,3 +1,4 @@
 film	Wilk_z_Wall_Street	komedia	9	napisy	2013	TAK
 film	Interstellar	fantastyczny	9	napisy	2014	TAK
 gra	Mortal_Kombat	akcja	9
+film	American_Horror_Story	horror	7	napisy	2012	TAK
