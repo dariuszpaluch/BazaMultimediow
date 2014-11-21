@@ -41,6 +41,50 @@ void BazaMultimediow::wyswietlWszystkieElementy()
 
 }
 
+void BazaMultimediow::wyswietlWszystkieFilmy ()
+{
+    int size = listaFilmow.size();
+    
+    
+    if (size > 0)
+    {
+        cout << "Twoja baza filmow:" <<size<< endl;
+        for (int i = 0; i < size; i++)
+        {
+            cout << i + 1 << ".";
+            //Film film = **listaFilmow[i];
+           // (Film)listaFilmow[i]->wyswietl();
+            listaElementow[listaFilmow[i]]->wyswietl();
+        }
+        cout << endl;
+    } else
+    {
+        cout << "Twoja baza filmów jest pusta." << endl;
+    }
+}
+
+void BazaMultimediow::wyswietlWszystkieGry ()
+{
+    int size = listaGier.size();
+    
+    
+    if (size > 0)
+    {
+        cout << "Twoja baza gier:" <<size<< endl;
+        for (int i = 0; i < size; i++)
+        {
+            cout << i + 1 << ".";
+            //Film film = **listaFilmow[i];
+           // (Film)listaFilmow[i]->wyswietl();
+            listaElementow[listaGier[i]]->wyswietl();
+        }
+        cout << endl;
+    } else
+    {
+        cout << "Twoja baza gier jest pusta." << endl;
+    }
+}
+
 void BazaMultimediow::wyswietlWszystkieTytulyElementow()
 {
     for (int i = 0; i < listaElementow.size(); i++)
@@ -53,13 +97,14 @@ void BazaMultimediow::wyswietlWszystkieTytulyElementow()
 
 }
 
-bool BazaMultimediow::dodajFilm(string tytul, string gatunek, int ocena, string wersja, int rokPremiery)
+bool BazaMultimediow::dodajFilm(string tytul, string gatunek, int ocena, string wersja, int rokPremiery, bool widzialem)
 {
     if ((tytul.length() > 0) && (gatunek.length() > 0) && (ocena != 0))
     {
-
-        listaElementow.push_back(new Film(tytul, gatunek, ocena, wersja, rokPremiery));
-
+        //Film film(tytul, gatunek, ocena, wersja, rokPremiery);
+        listaElementow.push_back(new Film(tytul, gatunek, ocena, wersja, rokPremiery, widzialem));
+        listaFilmow.push_back(listaElementow.size()-1);
+     //   cout<< "Ilosc filmow: "<<listaFilmow.size()<<endl;
         return true;
     } else
         return false;
@@ -71,6 +116,7 @@ bool BazaMultimediow::dodajGre(string tytul, string gatunek, int ocena)
     {
 
         listaElementow.push_back(new Gra(tytul, gatunek, ocena));
+        listaGier.push_back(listaElementow.size()-1);
 
 
 

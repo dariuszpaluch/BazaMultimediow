@@ -18,7 +18,7 @@ using namespace std;
 class Film : public Multimedia
 {
 public:
-    Film(string tytul, string gatunek, int ocena, string wersja, int rokPremiery);
+    Film(string tytul, string gatunek, int ocena, string wersja, int rokPremiery, bool widzialem);
     virtual ~Film();
     static int getIloscFilmow() 
     {
@@ -51,7 +51,7 @@ private:
     static int iloscFilmow;
     string wersja;
     int rokPremiery;
-
+    bool widzialem;
    
 
 };

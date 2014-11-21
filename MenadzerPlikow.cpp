@@ -64,6 +64,8 @@ void MenadzerPlikow::zapiszDoPliku(BazaMultimediow baza)
     string rodzaj;
     int ocena;
     string wersja;
+    string widzialemString;
+    bool widzialem;
     int rokPremiery;
     plik_odczyt.open(nazwaPliku, std::ios::in);
 
@@ -76,7 +78,11 @@ void MenadzerPlikow::zapiszDoPliku(BazaMultimediow baza)
 
             if (rodzaj=="film")
             {
-               plik_odczyt>> tytul >> gatunek>>ocena>>wersja>>rokPremiery; 
+               plik_odczyt>> tytul >> gatunek>>ocena>>wersja>>rokPremiery>>widzialemString; 
+               if (widzialemString == "TAK")
+                       widzialem=true;
+               else
+                   widzialem=false;
             } 
             
             if (rodzaj=="gra")
@@ -90,7 +96,7 @@ void MenadzerPlikow::zapiszDoPliku(BazaMultimediow baza)
                 gatunek = podkreslenieNaSpacje(gatunek);
                 
                 if (rodzaj=="film")
-                    baza.dodajFilm(tytul, gatunek, ocena,wersja,rokPremiery);
+                    baza.dodajFilm(tytul, gatunek, ocena,wersja,rokPremiery,widzialem);
                 if (rodzaj=="gra")
                     baza.dodajGre(tytul,gatunek,ocena);
             } else

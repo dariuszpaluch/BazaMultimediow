@@ -24,7 +24,7 @@ int PanelMenu::stringToInt(string text)
 {
     bool liczba = true;
 
-    if (text[0] == '0' && text.length()>1)
+    if (text[0] == '0' && text.length() > 1)
         liczba = false;
     else
         for (int i = 0; i < text.length(); i++)
@@ -54,10 +54,12 @@ int PanelMenu::showMainMenu()
 
         cout << "\n"
                 "-------------MENU-------------\n"
-                "1.Wyswietl spis wszystkich elementow. \n"
-                "2.Dodaj film. \n"
-                "3.Dodaj gre. \n"
-                "4.Usuń Element. \n"
+                "1.Wyświetl spis wszystkich elementów. \n"
+                "2.Wyświetl wszystkie filmy.\n"
+                "3.Wyświetl wszytkie gry.\n"
+                "4.Dodaj film. \n"
+                "5.Dodaj gre. \n"
+                "6.Usuń Element. \n"
                 "0.WYJSCIE."
                 "\n"
                 "Wprowadz nr wyboru:";
@@ -73,12 +75,18 @@ int PanelMenu::showMainMenu()
                 bazaElementow->wyswietlWszystkieElementy();
                 break;
             case 2:
-                addMovieFromUser();
+                bazaElementow->wyswietlWszystkieFilmy();
                 break;
             case 3:
-                addGameFromUser();
+                bazaElementow->wyswietlWszystkieGry();
                 break;
             case 4:
+                addMovieFromUser();
+                break;
+            case 5:
+                addGameFromUser();
+                break;
+            case 6:
                 if (bazaElementow->iloscWszystkichElementow() == 0)
                     cout << "Twoja baza filmow jest pusta !" << endl;
                 else
@@ -90,7 +98,11 @@ int PanelMenu::showMainMenu()
                 cout << "***Nie ma takiego wyboru.**** \n";
         }
         cout << endl << "Naciśnij aby kontynuować.";
-        getchar();
+        cin.get();
+        // int x;
+        // cin >> x;
+        //       cin.clear();
+        //       cin.ignore();
         system("clear");
 
     }
@@ -99,13 +111,13 @@ int PanelMenu::showMainMenu()
 int PanelMenu::getAnswer()
 {
     string odpowiedz;
+    //getline(cin,odpowiedz);
     cin >>odpowiedz;
     cin.clear();
     cin.ignore(); // to wywołanie usunie z bufora znak '\n' pozostawiony przez obiekt "cin"
 
     if (isdigit(odpowiedz[0]) && odpowiedz.length() == 1)
     {
-
         return stringToInt(odpowiedz);
     } else
         return -1;
@@ -126,10 +138,10 @@ void PanelMenu::addMovieFromUser()
     string ocenaString;
     cout << "Ocene filmu (0-10):";
     getline(cin, ocenaString);
-    
+
     ocena = stringToInt(ocenaString);
-    if (!(ocena<=10 && ocena >=0))
-        ocena=-1;
+    if (!(ocena <= 10 && ocena >= 0))
+        ocena = -1;
 
     bool wprowadzonaWersja = false;
     cout << "Wersja filmu(pl/napisy/lektor):";
@@ -143,16 +155,23 @@ void PanelMenu::addMovieFromUser()
     getline(cin, rokPremieryString);
 
     int rokPremiery = stringToInt(rokPremieryString);
-    if (!(rokPremiery>1000 && rokPremiery <=2014))
-        rokPremiery=-1;
+    if (!(rokPremiery > 1000 && rokPremiery <= 2014))
+        rokPremiery = -1;
+
+    string widzialem="";
+    cout << "Czy widziałeś ten film (TAK,NIE):";
+    getline(cin, widzialem);
+    bool widzialemBool;
+    if (widzialem == "TAK")
+        widzialemBool = true;
+    else
+        widzialemBool = false;
+    
 
 
-
-
-
-    if (tytul.length() > 0 && gatunek.length() > 0 && ocena != -1 && wprowadzonaWersja && rokPremiery!=-1)
+    if (tytul.length() > 0 && gatunek.length() > 0 && ocena != -1 && wprowadzonaWersja && rokPremiery != -1)
     {
-        bazaElementow->dodajFilm(tytul, gatunek, ocena, wersja, rokPremiery);
+        bazaElementow->dodajFilm(tytul, gatunek, ocena, wersja, rokPremiery, widzialemBool);
         cout << "Dodano film do bazy danych" << endl;
 
     } else

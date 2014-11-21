@@ -1,2 +1,3 @@
-gra	Assassin_Creed_Unity	akcja	7
-film	Shrek	bajka	10	pl	2001
+film	Wilk_z_Wall_Street	komedia	9	napisy	2013	TAK
+film	Interstellar	fantastyczny	9	napisy	2014	NIE
+gra	Mortal_Kombat	akcja	9
