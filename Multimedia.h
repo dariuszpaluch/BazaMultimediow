@@ -1,6 +1,6 @@
 /* 
  * File:   Multimedia.h
- * Author: darek
+ * Author: Dariusz Paluch
  *
  * Created on 9 listopada 2014, 16:49
  */

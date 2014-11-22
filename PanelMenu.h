@@ -1,8 +1,8 @@
 /* 
  * File:   PanelMenu.h
- * Author: darek
+ * Author: Dariusz Paluch
  *
- * Created on 8 listopada 2014, 20:49
+ * Created on 9 listopada 2014, 20:49
  */
 
 #ifndef PANELMENU_H
@@ -12,28 +12,33 @@
 #include <iostream>
 #include <sstream>
 #include <unistd.h>
-#include "BazaMultimediow.h"
 #include <cstdio>
 #include <stdlib.h>
+#include <stdio.h>
+#include "BazaMultimediow.h"
+#include "Film.h"
+#include "BazaMultimediow.h"
+
 using namespace std;
 
-class PanelMenu
-{
+class PanelMenu {
 public:
-    PanelMenu(BazaMultimediow * bazaFilmow);
+    PanelMenu(BazaMultimediow * bazaElementow);
 
     virtual ~PanelMenu();
-    int showMainMenu();
-    int getAnswer();
+    int pokazGlowneMenu();
+    int pobierzNumerOdpowiedz();
     void wyswietlWszystkieElementy();
     void wyswietlWszystkieFilmy();
     void wyswietlWszystkieGry();
     void wyswietlFilmyKtorychNieWidziales();
-    void addMovieFromUser();
-    void addGameFromUser();
-    void removeSelectMovie();
-    void setWatchedMovieFromUser();
+    void dodajFilmPrzezUzytkownika();
+    void dodajGrePrzezUzytkownika();
+    void usunWybranyElement();
+    void usunCalaBazeDanych();
+    void ustawFilmOgladany();
     int stringToInt(string text);
+    
 private:
     BazaMultimediow *bazaElementow;
 };

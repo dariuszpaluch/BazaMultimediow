@@ -1,6 +1,6 @@
 /* 
  * File:   main.cpp
- * Author: darek
+ * Author: Dariusz Paluch
  *
  * Created on 9 listopada 2014, 16:49
  */
@@ -18,22 +18,19 @@
 
 using namespace std;
 
-
 int main(int argc, char** argv)
 {
-   
-    char plik[] = "plik.txt";
-    MenadzerPlikow menadzerPliku(plik);
-    BazaMultimediow baza;
-    
-    baza=menadzerPliku.wczytajZPlik();
-    
-    PanelMenu panel(&baza);
-    panel.showMainMenu();
-    
-    menadzerPliku.zapiszDoPliku(baza);
-    
-    baza.UsunBazeDanych();
-    
+    char nazwaPlik[] = "plik.txt";
+
+    MenadzerPlikow menadzerPliku(nazwaPlik);
+    BazaMultimediow bazaDanych;
+    bazaDanych = menadzerPliku.wczytajZPlik();
+
+    PanelMenu panel(&bazaDanych);
+    panel.pokazGlowneMenu();
+
+    menadzerPliku.zapiszDoPliku(bazaDanych);
+    bazaDanych.usunBazeDanych();
+
     return 0;
 }

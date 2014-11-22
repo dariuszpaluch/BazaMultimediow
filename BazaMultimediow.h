@@ -27,13 +27,13 @@ public:
     bool wyswietlWszystkieGry();
     bool wyswietlWszystkieTytulyElementow();
     bool wyswietlWszystkieTytuluFilmowNieWidzialem();
-    bool setSelectWatchedMovie(string tittleMovie);
+    bool ustawFilmJakoObejrzany(string tittleMovie);
     
     bool dodajFilm(string tytul, string gatunek, int ocena, string wersja , int rokPremiery, bool widzialem);
     bool dodajGre(string tytul, string gatunek, int ocena);
     bool usunElement(int x);
     bool usunElement(string tytul);
-    void UsunBazeDanych();
+    void usunBazeDanych();
     int iloscFilmow()
     {
         return Film::getIloscFilmow();

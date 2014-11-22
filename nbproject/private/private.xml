@@ -7,14 +7,13 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/home/darek/NetBeansProjects/BazaMultimediow/Film.cpp</file>
             <file>file:/home/darek/NetBeansProjects/BazaMultimediow/Film.h</file>
-            <file>file:/home/darek/NetBeansProjects/BazaMultimediow/Gra.cpp</file>
             <file>file:/home/darek/NetBeansProjects/BazaMultimediow/BazaMultimediow.cpp</file>
             <file>file:/home/darek/NetBeansProjects/BazaMultimediow/PanelMenu.cpp</file>
-            <file>file:/home/darek/NetBeansProjects/BazaMultimediow/main.cpp</file>
             <file>file:/home/darek/NetBeansProjects/BazaMultimediow/PanelMenu.h</file>
-            <file>file:/home/darek/NetBeansProjects/BazaMultimediow/Multimedia.cpp</file>
+            <file>file:/home/darek/NetBeansProjects/BazaMultimediow/main.cpp</file>
+            <file>file:/home/darek/NetBeansProjects/BazaMultimediow/MenadzerPlikow.cpp</file>
+            <file>file:/home/darek/NetBeansProjects/BazaMultimediow/MenadzerPlikow.h</file>
             <file>file:/home/darek/NetBeansProjects/BazaMultimediow/BazaMultimediow.h</file>
         </group>
     </open-files>

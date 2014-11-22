@@ -1,18 +1,15 @@
 /* 
  * File:   PanelMenu.cpp
- * Author: darek
+ * Author: Dariusz Paluch
  * 
- * Created on 8 listopada 2014, 20:49
+ * Created on 9 listopada 2014, 20:49
  */
 
 #include "PanelMenu.h"
-#include "BazaMultimediow.h"
-#include <stdio.h>
-#include "Film.h"
 
-PanelMenu::PanelMenu(BazaMultimediow * bazafilmow)
+PanelMenu::PanelMenu(BazaMultimediow * bazaElementow)
 {
-    this->bazaElementow = bazafilmow;
+    this->bazaElementow = bazaElementow;
 
 }
 
@@ -35,22 +32,21 @@ int PanelMenu::stringToInt(string text)
 
     if (liczba)
     {
-
-
         int x;
         istringstream iss(text);
         iss >> x;
+
         return x;
     } else
         return -1;
 }
 
-int PanelMenu::showMainMenu()
+int PanelMenu::pokazGlowneMenu()
 {
+    system("clear");
     int wybor = -1;
     while (wybor != 0)
     {
-
 
         cout << "\n"
                 "-------------MENU-------------\n"
@@ -61,12 +57,13 @@ int PanelMenu::showMainMenu()
                 "5.Dodaj film. \n"
                 "6.Dodaj gre. \n"
                 "7.Zaznacz że obejrzałeś jakiś film.\n"
-                "8.Usuń Element. \n"
+                "8.Usuń element. \n"
+                "9.Usuń całą baze danych.\n"
                 "0.WYJSCIE."
                 "\n"
                 "Wprowadz nr wyboru:";
 
-        wybor = getAnswer();
+        wybor = pobierzNumerOdpowiedz();
         cout << "------------------------------" << endl;
         system("clear");
         switch (wybor)
@@ -86,21 +83,24 @@ int PanelMenu::showMainMenu()
                 wyswietlFilmyKtorychNieWidziales();
                 break;
             case 5:
-                addMovieFromUser();
+                dodajFilmPrzezUzytkownika();
                 break;
             case 6:
-                addGameFromUser();
+                dodajGrePrzezUzytkownika();
                 break;
             case 7:
-                setWatchedMovieFromUser();
+                ustawFilmOgladany();
                 break;
             case 8:
-                removeSelectMovie();
+                usunWybranyElement();
+                break;
+            case 9:
+                usunCalaBazeDanych();
                 break;
             default:
                 cout << "***Nie ma takiego wyboru.**** \n";
         }
-        cout << endl << "Naciśnij aby kontynuować.";
+        cout << endl << "Naciśnij enter aby kontynuować.";
         cin.get();
         system("clear");
 
@@ -109,30 +109,49 @@ int PanelMenu::showMainMenu()
 
 void PanelMenu::wyswietlWszystkieElementy()
 {
+    cout << "Twoja baza danych:" << endl;
     if (!bazaElementow->wyswietlWszystkieElementy())
+    {
+        system("clear");
         cout << "Twoja baza danych jest pusta." << endl;
+    }
+
 
 }
 
 void PanelMenu::wyswietlWszystkieFilmy()
 {
+    cout << "Twoja baza filmów:" << endl;
     if (!bazaElementow->wyswietlWszystkieFilmy())
+    {
+        system("clear");
         cout << "Twoja baza filmów jest pusta." << endl;
+    }
 }
 
 void PanelMenu::wyswietlWszystkieGry()
 {
+    cout << "Twoja baza gier:" << endl;
     if (!bazaElementow->wyswietlWszystkieGry())
+    {
+        system("clear");
         cout << "Twoja baza gier jest pusta." << endl;
+    }
+
 }
 
 void PanelMenu::wyswietlFilmyKtorychNieWidziales()
 {
+    cout << "Filmy których jeszcze nie widziałeś:" << endl;
     if (!bazaElementow->wyswietlFilmyKtorychNieWidziales())
+    {
+        system("clear");
         cout << "Widziałeś wszystkie filmy z twojej bazy danych." << endl;
+    }
+
 }
 
-int PanelMenu::getAnswer()
+int PanelMenu::pobierzNumerOdpowiedz()
 {
     string odpowiedz;
     //getline(cin,odpowiedz);
@@ -148,18 +167,18 @@ int PanelMenu::getAnswer()
 
 }
 
-void PanelMenu::addMovieFromUser()
+void PanelMenu::dodajFilmPrzezUzytkownika()
 {
-    string tytul, gatunek;
-    int ocena = -1;
-    string wersja;
+    string tytul;
     cout << "Tytuł filmu:";
     getline(cin, tytul);
 
+    string gatunek;
     cout << "Gatunek filmu:";
     getline(cin, gatunek);
 
     string ocenaString;
+    int ocena = -1;
     cout << "Ocene filmu (0-10):";
     getline(cin, ocenaString);
 
@@ -168,11 +187,13 @@ void PanelMenu::addMovieFromUser()
         ocena = -1;
 
     bool wprowadzonaWersja = false;
+    string wersja;
     cout << "Wersja filmu(pl/napisy/lektor):";
     getline(cin, wersja);
 
     if (wersja == "pl" || wersja == "napisy" || wersja == "lektor")
         wprowadzonaWersja = true;
+
 
     string rokPremieryString;
     cout << "Rok premiery:";
@@ -186,7 +207,7 @@ void PanelMenu::addMovieFromUser()
     cout << "Czy widziałeś ten film (TAK,NIE):";
     getline(cin, widzialem);
     bool widzialemBool;
-    if (widzialem == "TAK")
+    if (widzialem == "TAK" || widzialem == "Tak" || widzialem == "tak")
         widzialemBool = true;
     else
         widzialemBool = false;
@@ -202,19 +223,20 @@ void PanelMenu::addMovieFromUser()
         cout << "Złe wprowadzone dane. Spróboj jeszcze raz." << endl;
 }
 
-void PanelMenu::addGameFromUser()
+void PanelMenu::dodajGrePrzezUzytkownika()
 {
-    string tytul, gatunek;
-    int ocena = -1;
 
 
+    string tytul;
     cout << "Tytuł gry:";
     getline(cin, tytul);
 
+    string gatunek;
     cout << "Gatunek gry:";
     getline(cin, gatunek);
 
     string ocenaString;
+    int ocena = -1;
     cout << "Ocene gry (0-10):";
     getline(cin, ocenaString);
 
@@ -233,7 +255,7 @@ void PanelMenu::addGameFromUser()
 
 }
 
-void PanelMenu::setWatchedMovieFromUser()
+void PanelMenu::ustawFilmOgladany()
 {
     if (bazaElementow->wyswietlWszystkieTytuluFilmowNieWidzialem())
     {
@@ -241,7 +263,7 @@ void PanelMenu::setWatchedMovieFromUser()
         string answer;
         getline(cin, answer);
         bool widzialem = false;
-        widzialem = bazaElementow->setSelectWatchedMovie(answer);
+        widzialem = bazaElementow->ustawFilmJakoObejrzany(answer);
 
 
         if (widzialem)
@@ -249,20 +271,15 @@ void PanelMenu::setWatchedMovieFromUser()
         else
             cout << "Nie ma takiego filmu.";
 
-
-
-
-    }
-    cout << "Widziałeś wszystkie filmy z bazy danych";
+    } else
+        cout << "Widziałeś wszystkie filmy z bazy danych";
 }
 
-void PanelMenu::removeSelectMovie()
+void PanelMenu::usunWybranyElement()
 {
 
     if (bazaElementow->wyswietlWszystkieTytulyElementow())
     {
-
-
         cout << endl << "Wprowadz nazwe lub numer Elementu do usunięcia: ";
         string answer;
         getline(cin, answer);
@@ -297,4 +314,17 @@ void PanelMenu::removeSelectMovie()
             cout << "Takiego elementu nie ma w bazie." << endl;
     } else
         cout << "Twoja baza danych jest pusta.";
-    }
+}
+
+void PanelMenu::usunCalaBazeDanych()
+{
+    string odpowiedz;
+    cout<<"Czy napewno chcesz usunac cala baze danych? (TAK/NIE)";
+    cin>>odpowiedz;
+    
+    if (odpowiedz=="TAK" || odpowiedz=="tak" || odpowiedz=="Tak")
+        bazaElementow->usunBazeDanych();
+    
+    cin.clear();
+    cin.ignore();
+}

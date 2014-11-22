@@ -1,6 +1,6 @@
 /* 
  * File:   BazaMultimediow.cpp
- * Author: darek
+ * Author: Dariusz Paluch
  * 
  * Created on 9 listopada 2014, 17:27
  */
@@ -23,9 +23,6 @@ bool BazaMultimediow::wyswietlWszystkieElementy()
     int size = listaElementow.size();
     if (size > 0)
     {
-
-
-        cout << "Twoja baza danych:" << endl;
         for (int i = 0; i < size; i++)
         {
             cout << i + 1 << ".";
@@ -42,7 +39,6 @@ bool BazaMultimediow::wyswietlWszystkieElementy()
 bool BazaMultimediow::wyswietlWszystkieFilmy()
 {
     int size = listaFilmow.size();
-
 
     if (size > 0)
     {
@@ -63,10 +59,8 @@ bool BazaMultimediow::wyswietlWszystkieGry()
 {
     int size = listaGier.size();
 
-
     if (size > 0)
     {
-        cout << "Twoja baza gier:" << size << endl;
         for (int i = 0; i < size; i++)
         {
             cout << i + 1 << ".";
@@ -90,9 +84,6 @@ bool BazaMultimediow::wyswietlWszystkieTytulyElementow()
 
         for (int i = 0; i < listaElementow.size(); i++)
             cout << i + 1 << "." << (*listaElementow[i]) << endl;
-        // cout << i+1 << ". " << listaElementow[i]->getTytul() << endl;
-
-
 
         cout << endl;
         return true;
@@ -109,7 +100,6 @@ bool BazaMultimediow::wyswietlFilmyKtorychNieWidziales()
         {
             listaFilmow[i]->wyswietl();
             brakFilmowDoWyswietlenia = true;
-
         }
 
     }
@@ -121,7 +111,7 @@ bool BazaMultimediow::wyswietlFilmyKtorychNieWidziales()
         return false;
 }
 
-bool BazaMultimediow::setSelectWatchedMovie(string tittleMovie)
+bool BazaMultimediow::ustawFilmJakoObejrzany(string tittleMovie)
 {
     for (int i = 0; i < listaFilmow.size(); i++)
     {
@@ -131,9 +121,7 @@ bool BazaMultimediow::setSelectWatchedMovie(string tittleMovie)
             return true;
         }
 
-
     }
-
 
     return false;
 }
@@ -147,7 +135,7 @@ bool BazaMultimediow::wyswietlWszystkieTytuluFilmowNieWidzialem()
     {
         if (!listaFilmow[i]->isWidzialem())
         {
-            cout << j << "." << listaFilmow[i]->getTytul() << endl;
+            cout << j << "." << (*listaFilmow[i]) << endl;
             j++;
         }
     }
@@ -162,10 +150,9 @@ bool BazaMultimediow::dodajFilm(string tytul, string gatunek, int ocena, string 
 {
     if ((tytul.length() > 0) && (gatunek.length() > 0) && (ocena != 0))
     {
-        //Film film(tytul, gatunek, ocena, wersja, rokPremiery);
         listaElementow.push_back(new Film(tytul, gatunek, ocena, wersja, rokPremiery, widzialem));
         listaFilmow.push_back((Film*) listaElementow[listaElementow.size() - 1]);
-        //   cout<< "Ilosc filmow: "<<listaFilmow.size()<<endl;
+
         return true;
     } else
         return false;
@@ -175,12 +162,8 @@ bool BazaMultimediow::dodajGre(string tytul, string gatunek, int ocena)
 {
     if ((tytul.length() > 0) && (gatunek.length() > 0) && (ocena != 0))
     {
-
         listaElementow.push_back(new Gra(tytul, gatunek, ocena));
         listaGier.push_back((Gra*) listaElementow[listaElementow.size() - 1]);
-
-
-
 
         return true;
     } else
@@ -190,9 +173,6 @@ bool BazaMultimediow::dodajGre(string tytul, string gatunek, int ocena)
 
         listaElementow.push_back(new Gra(tytul, gatunek, ocena));
 
-
-
-
         return true;
     } else
         return false;
@@ -201,8 +181,21 @@ bool BazaMultimediow::dodajGre(string tytul, string gatunek, int ocena)
 
 bool BazaMultimediow::usunElement(int x)
 {
+
     if (x < listaElementow.size())
     {
+        string tytul = listaElementow[x]->getTytul();
+
+        for (int j = 0; j < listaFilmow.size(); j++)
+            if (listaFilmow[j]->getTytul() == tytul)
+                listaFilmow.erase(listaFilmow.begin() + j);
+
+
+        for (int j = 0; j < listaGier.size(); j++)
+            if (listaGier[j]->getTytul() == tytul)
+                listaGier.erase(listaGier.begin() + j);
+
+
         delete listaElementow[x];
         listaElementow.erase(listaElementow.begin() + x);
         return true;
@@ -221,22 +214,38 @@ bool BazaMultimediow::usunElement(string tytul)
     {
         if (listaElementow[i]->getTytul() == tytul)
         {
+
+            for (int j = 0; j < listaFilmow.size(); j++)
+                if (listaFilmow[j]->getTytul() == tytul)
+                    listaFilmow.erase(listaFilmow.begin() + j);
+
+
+            for (int j = 0; j < listaGier.size(); j++)
+                if (listaGier[j]->getTytul() == tytul)
+                    listaGier.erase(listaGier.begin() + j);
+
+
             delete listaElementow[i];
             listaElementow.erase(listaElementow.begin() + i);
 
+
+
+
+
             return true;
-
-
         }
     }
 
     return false;
 }
 
-void BazaMultimediow::UsunBazeDanych()
+void BazaMultimediow::usunBazeDanych()
 {
-    for (int i = 0; i < listaElementow.size(); i++)
+    while (listaElementow.size() != 0)
     {
-        delete listaElementow[i];
+        delete listaElementow[0];
+        listaElementow.erase(listaElementow.begin());
     }
+    listaFilmow.clear();
+    listaGier.clear();
 }

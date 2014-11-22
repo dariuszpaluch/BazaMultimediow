@@ -7,8 +7,9 @@
 
 #include "MenadzerPlikow.h"
 
-MenadzerPlikow::MenadzerPlikow(char *nazwaPliku) {
-    this->nazwaPliku=nazwaPliku;
+MenadzerPlikow::MenadzerPlikow(char *nazwaPliku)
+{
+    this->nazwaPliku = nazwaPliku;
 }
 
 string MenadzerPlikow::podkreslenieNaSpacje(string tekst)
@@ -31,9 +32,9 @@ string MenadzerPlikow::spacjaNaPodkreslenie(string tekst)
 
 void MenadzerPlikow::zapiszDoPliku(BazaMultimediow baza)
 {
-     //zapis pliku
+    //zapis pliku
     fstream plik;
-    plik.open(nazwaPliku, std::ios::out );
+    plik.open(nazwaPliku, std::ios::out);
 
 
 
@@ -47,18 +48,18 @@ void MenadzerPlikow::zapiszDoPliku(BazaMultimediow baza)
             tekstDoZapisu = spacjaNaPodkreslenie(tekstDoZapisu);
             plik << tekstDoZapisu;
         }
-        cout<<endl;
-        cout<<"Baza danych została zapisana."<<endl;
+        cout << endl;
+        cout << "Baza danych została zapisana." << endl;
     } else cout << "Brak dostepu do pliku, nie zapisano danych." << endl;
     plik.close();
-    
+
 }
 
-    BazaMultimediow MenadzerPlikow::wczytajZPlik()
-    {
-        BazaMultimediow baza;
-        
-        // odczyt z pliku
+BazaMultimediow MenadzerPlikow::wczytajZPlik()
+{
+    BazaMultimediow baza;
+
+    // odczyt z pliku
     fstream plik_odczyt;
     string tytul, gatunek;
     string rodzaj;
@@ -76,36 +77,37 @@ void MenadzerPlikow::zapiszDoPliku(BazaMultimediow baza)
         {
             plik_odczyt >>rodzaj;
 
-            if (rodzaj=="film")
+            if (rodzaj == "film")
             {
-               plik_odczyt>> tytul >> gatunek>>ocena>>wersja>>rokPremiery>>widzialemString; 
-               if (widzialemString == "TAK")
-                       widzialem=true;
-               else
-                   widzialem=false;
-            } 
-            
-            if (rodzaj=="gra")
-                plik_odczyt >>tytul >> gatunek>>ocena;
-             
-            
-            
+                plik_odczyt >> tytul >> gatunek >> ocena >> wersja >> rokPremiery>>widzialemString;
+                if (widzialemString == "TAK")
+                    widzialem = true;
+                else
+                    widzialem = false;
+            }
+
+            if (rodzaj == "gra")
+                plik_odczyt >> tytul >> gatunek >> ocena;
+
+
+
             if (plik_odczyt.good())
             {
                 tytul = podkreslenieNaSpacje(tytul);
                 gatunek = podkreslenieNaSpacje(gatunek);
-                
-                if (rodzaj=="film")
-                    baza.dodajFilm(tytul, gatunek, ocena,wersja,rokPremiery,widzialem);
-                if (rodzaj=="gra")
-                    baza.dodajGre(tytul,gatunek,ocena);
+
+                if (rodzaj == "film")
+                    baza.dodajFilm(tytul, gatunek, ocena, wersja, rokPremiery, widzialem);
+                if (rodzaj == "gra")
+                    baza.dodajGre(tytul, gatunek, ocena);
             } else
                 break;
         }
-        
+
         std::cout << "Wczytano baze danych." << std::endl;
-    } else std::cout <<"Brak bazy danych!" << std::endl;
+
+    } else std::cout << "Brak bazy danych!" << std::endl;
     plik_odczyt.close();
-    
-        return baza;
-    }
+
+    return baza;
+}
